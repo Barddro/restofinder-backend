@@ -11,7 +11,10 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // Allow Next.js frontend
+    origin: [
+    "http://localhost:3000", // Allow Next.js frontend
+    "https://restofinder-backend-production.up.railway.app:8080"
+    ],
     methods: ["GET", "POST"],
   },
 });
@@ -248,4 +251,5 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(4000, () => console.log("Socket.IO server running on port 4000"));
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => console.log("Socket.IO server running on port 4000"));
