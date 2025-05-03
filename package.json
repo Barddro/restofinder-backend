@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node app/server.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -12,20 +12,8 @@
     "@googlemaps/places": "^1.10.0",
     "@mui/material": "^6.4.7",
     "express": "^4.21.2",
-    "lucide-react": "^0.479.0",
-    "next": "15.2.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "rsuite": "^5.78.0",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "tailwindcss": "^4",
-    "typescript": "^5"
   }
 }
