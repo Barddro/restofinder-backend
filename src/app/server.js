@@ -251,5 +251,5 @@ io.on("connection", (socket) => {
     });
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = 8080;
 server.listen(PORT, () => console.log("Socket.IO server running on port 4000"));
