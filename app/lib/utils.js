@@ -1,4 +1,3 @@
-const { Newspaper } = require('lucide-react');
 const foodMap = require('../../public/foodMap.json');
 
 function processVotes(restos, votesArr) {
