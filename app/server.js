@@ -6,15 +6,22 @@ const { Server } = require("socket.io");
 const cors = require("cors"); 
 const utils = require("./lib/utils.js");
 const mapUtils = require("./lib/maps.js");
+require("dotenv").config();
 
 const app = express();
+const isProd = process.env.NODE_ENV === "production";
+const PORT = process.env.PORT;
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
+    /*
     origin: [
     "http://localhost:3000", // Allow Next.js frontend
     "https://restofinder-backend-production.up.railway.app:8080"
+    // add render dir
     ],
+    */
+    origin: [process.env.FRONTEND_URL],
     methods: ["GET", "POST"],
   },
 });
@@ -40,12 +47,6 @@ io.on("connection", (socket) => {
             restrictions: Array(4).fill(false),
             location: {},
             clientInput: [
-                /*
-                [], //foodTypeWant
-                [], //foodTypeDontWant
-                [], // Distance
-                [], // PriceRange
-                */
                 {}, //foodTypeWant
                 {}, //foodTypeDontWant
                 {}, // Distance
@@ -251,5 +252,5 @@ io.on("connection", (socket) => {
     });
 });
 
-const PORT = process.env.PORT || 4000;
-server.listen(PORT, () => console.log("Socket.IO server running on port 4000"));
+
+server.listen(PORT, () => console.log("Socket.IO server running on port {PORT}"));
