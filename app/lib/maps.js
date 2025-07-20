@@ -1,12 +1,14 @@
-
+require("dotenv").config();
 const { Client } = require("@googlemaps/google-maps-services-js");
 const { PlacesClient } = require('@googlemaps/places').v1;
 // Create a maps client
 const mapsClient = new Client({});
 
 
+
 async function fetchMapsData(cuisineType, latitude, longitude, radius, priceLevel, numberOfRestos) {
-  const API_KEY = 'AIzaSyCn5q1Ds8lyBFtzexmxgvFJL-OagAi3t3c';
+  //
+  const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
   
   try {
     const response = await mapsClient.placesNearby({

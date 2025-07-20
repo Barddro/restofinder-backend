@@ -22,12 +22,7 @@ function getMaxIndices(arr) {
     });
     
     return indices;
-  }
-
-function processRawRestoData() {
-
 }
-
 
 function processData(clientInput, numOfClients) {
     formatClientInput(clientInput);
@@ -62,7 +57,6 @@ function formatClientInput(clientInput) {
 }    
 
 function processRestoNums(numOfClients, foodTypeWantInput, foodTypeDontWantInput) {
-    //const RestaurantTypes = {};
 
 
     numOfRestos = (numOfClients > 6) ? Math.round(2.3*Math.sqrt(numOfClients)) : 5;
