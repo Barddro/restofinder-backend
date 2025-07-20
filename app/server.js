@@ -142,25 +142,30 @@ io.on("connection", (socket) => {
             }
 
             try {
-              const rawRestoData = [];
-              const promises = [];
-              
-              for (const foodType of Object.keys(rooms[roomCode].restaurants[0])) {
-                const numRestaurants = rooms[roomCode].restaurants[0][foodType];
-                promises.push(
-                  mapUtils.fetchMapsData(foodType, rooms[roomCode].location.lat, rooms[roomCode].location.lng, 
-                                     rooms[roomCode].restaurants[1], rooms[roomCode].restaurants[2], numRestaurants)
-                  .then(results => {
-                    console.log(`Found ${results.length} restaurants for ${foodType}`);
-                    if (results.length > 0) {
-                      rawRestoData.push(...results);
-                    }
-                    return results;
-                  })
-                );
-              }
+                const rawRestoData = [];
+                const promises = [];
+                let totalFound = 0;
+                
+                for (const foodType of Object.keys(rooms[roomCode].restaurants[0])) {
+                    const numRestaurants = rooms[roomCode].restaurants[0][foodType];
+                    promises.push(
+                        mapUtils.fetchMapsData(foodType, rooms[roomCode].location.lat, rooms[roomCode].location.lng, 
+                                            rooms[roomCode].restaurants[1], rooms[roomCode].restaurants[2], numRestaurants)
+                        .then(results => {
+                            console.log(`Found ${results.length} restaurants for ${foodType}`);
+                            if (results.length > 0) {
+                                rawRestoData.push(...results);
+                                totalFound += results.length;
+                            }
+                            return results;
+                        })
+                    );
+                }
               
               await Promise.all(promises);
+              for (let i = 0; i < rawRestoData.length; i++) {
+                rawRestoData[i].id = i; // Assign a unique ID to each restaurant
+              }
               rooms[roomCode].restoData = rawRestoData;
 //BREAKPOINT1->
               if (rawRestoData.length > 0) {

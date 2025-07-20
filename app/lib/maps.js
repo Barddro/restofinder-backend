@@ -30,7 +30,8 @@ async function fetchMapsData(cuisineType, latitude, longitude, radius, priceLeve
       goodResults = [];
       for (let i = 0; i < Math.min(numberOfRestos, response.data.results.length); i++) {
         response.data.results[i].photoUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=4000&photoreference=${response.data.results[i].photos[0].photo_reference}&key=${API_KEY}`;
-        response.data.results[i].id = i;
+        //response.data.results[i].id = numOfPrevRestos + i;
+        //console.log('new resto id is: ' + (numOfPrevRestos + i));
         goodResults.push(response.data.results[i]);
       }
       return goodResults;
